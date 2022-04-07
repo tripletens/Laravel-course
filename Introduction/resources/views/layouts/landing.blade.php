@@ -23,9 +23,7 @@
     <body class="antialiased">
         @include('const.header')
 
-        {{-- @yield('content1') 
-
-        @yield('content2')  --}}
+        @yield('content') 
         
         <p> my body comes here </p>
 
