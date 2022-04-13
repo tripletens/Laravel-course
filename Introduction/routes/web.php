@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\checkage;
 
@@ -15,29 +16,9 @@ use App\Http\Middleware\checkage;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [HomeController::class,'homepage'])->name('landing-page');
 
-    $students = [
-        [
-            "name" => "Nonso",
-            "age" => 20
-        ],
-        [
-            "name" => "Nonso",
-            "age" => 40
-        ],
-        [
-            "name" => "Tony",
-            "age" => 35
-        ]
-    ];
-
-    $data = [
-        'students'=>$students
-    ];
-
-    return view('pages.home')->with($data);
-});
+Route::post('/submit_form', [HomeController::class,'submit_form'])->name('submit_form_page');
 
 Route::get('/about', function () {
     return view('pages.about');
@@ -56,10 +37,12 @@ Route::name('hello.')->group(function () {
 
 });
 
-Route::middleware('isadmin')->group(function(){
+// Route::middleware('isadmin')->group(function(){
     Route::get('/parent', [TestController::class, 'hello_parent_page'])->name('parent');
-});
+// });
 
 Route::post('/teacher', [TestController::class, 'hello_teacher_page'])->name('teacher');
+
+
 
 Route::fallback([TestController::class, 'fallback_page'])->name('error-page');

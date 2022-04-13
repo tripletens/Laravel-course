@@ -8,9 +8,16 @@ class TestController extends Controller
 {
     // this is for hello page 
 
+    public function __construct()
+    {
+        // add a middleware 
+        $this->middleware('isadmin')->only('hello_parent_page');
+    }
+
     public function hello_page(){
         echo "hello page from controller ";
     }
+    
     public function hello_student_page($age = false){
         if ($age){
             echo "Hello this student is $age years old";
